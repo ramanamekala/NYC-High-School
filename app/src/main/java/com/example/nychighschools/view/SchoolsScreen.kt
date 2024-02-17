@@ -10,6 +10,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
@@ -24,7 +25,7 @@ import com.example.nychighschools.viewmodel.HighSchoolViewModel
 @Composable
 fun DisplaySchoolsInfoScreen(viewModel: HighSchoolViewModel){
 
-    val schoolsList by viewModel.schoolsInfo.observeAsState(emptyList())
+    val schoolsList = viewModel.schoolsInfo.collectAsState().value
 
     LaunchedEffect(Unit) {
 
@@ -38,20 +39,19 @@ fun DisplaySchoolsInfoScreen(viewModel: HighSchoolViewModel){
           Text(text = "Loading ....") 
            
        } else {
-           
-           LazyColumn {
+               LazyColumn {
 
 
-               items(schoolsList) { schoolInfo ->
+                   items(schoolsList) { schoolInfo ->
 
-                   SchoolInfo(schoolInfo = schoolInfo, onItemClick = { selectedSchoolInfo ->
+                       SchoolInfo(schoolInfo = schoolInfo, onItemClick = { selectedSchoolInfo ->
 
-                       // Handle item click, e.g., navigate to detail screen
-                   })
-                   
+                           // Handle item click, e.g., navigate to detail screen
+                       })
+
+                   }
+
                }
-               
-           }
            
        }
        

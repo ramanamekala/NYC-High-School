@@ -6,8 +6,8 @@ class SchoolRepository {
 
     private val apiService = RetrofitInstance.apiService
 
-    suspend fun getSchoolsInfo(): ArrayList<HighSchoolModel> {
-        return apiService.getSchoolsInfo() as ArrayList<HighSchoolModel>
+    suspend fun getSchoolsInfo(): List<HighSchoolModel> {
+        return apiService.getSchoolsInfo()
     }
 
 }
